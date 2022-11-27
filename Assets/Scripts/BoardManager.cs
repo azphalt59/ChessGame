@@ -100,32 +100,29 @@ public class BoardManager : MonoBehaviour
     void GenerateStarterPiece()
     {
         // Player 1 pieces
-        for (int i = 7; i < 12; i++)
+        for (int i = 8; i < 24; i++)
         {
-            GameObject piece = Instantiate(piecePrefabs[0], tilesGrid[i].TileObject.transform.position, Quaternion.identity);
+            GameObject piece = Instantiate(piecePrefabs[1], tilesGrid[i].TileObject.transform.position, Quaternion.identity);
             piece.transform.SetParent(player1Pieces.transform);
             piece.GetComponent<Piece>().PlayerIndex = 1;
-            piece.name = piecePrefabs[0].name + " player " + piece.GetComponent<Piece>().PlayerIndex;
+            piece.name = piecePrefabs[1].name + " player " + piece.GetComponent<Piece>().PlayerIndex;
             AllPieces.Add(piece.GetComponent<Piece>());
             piece.GetComponent<Piece>().CurrentTileIndex = i;
             tilesGrid[i].PlayerIndexPiece = 1;
         }
 
         // Player 2 pieces
-        for (int i = 46; i < 58; i++)
+        for (int i = 50; i < 64; i++)
         {
-            GameObject piece2 = Instantiate(piecePrefabs[0], tilesGrid[i].TileObject.transform.position, Quaternion.identity);
+            GameObject piece2 = Instantiate(piecePrefabs[1], tilesGrid[i].TileObject.transform.position, Quaternion.identity);
             piece2.transform.SetParent(player2Pieces.transform);
             piece2.GetComponent<Piece>().PlayerIndex = 2;
-            piece2.name = piecePrefabs[0].name + " player " + piece2.GetComponent<Piece>().PlayerIndex;
+            piece2.name = piecePrefabs[1].name + " player " + piece2.GetComponent<Piece>().PlayerIndex;
             AllPieces.Add(piece2.GetComponent<Piece>());
             piece2.GetComponent<SpriteRenderer>().color = Color.grey;
             piece2.GetComponent<Piece>().CurrentTileIndex = i;
             tilesGrid[i].PlayerIndexPiece = 2;
-
         }
-
-        tilesGrid[0].PlayerIndexPiece = 0;
     }
     public void MovePiece(int currIndex, int newIndex, Piece piece)
     {

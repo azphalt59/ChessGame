@@ -46,6 +46,7 @@ public class TileObject : MonoBehaviour
         {
             Debug.Log("move");
             BoardManager.Instance.UpdatePlayerTurn();
+            thisTile.PlayerIndexPiece = BoardManager.Instance.GetPiece().PlayerIndex;
             BoardManager.Instance.MovePiece(BoardManager.Instance.GetPiece().CurrentTileIndex, thisTile.TileIndex, BoardManager.Instance.GetPiece());
             BoardManager.Instance.ResetMoves();
             return;
