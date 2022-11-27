@@ -17,6 +17,7 @@ public class Tile
 public class BoardManager : MonoBehaviour
 {
     public static BoardManager Instance {get; private set;}
+    public int pieceTest;
     public int BoardSize = 8;
     private int columns;
     private int rows;
@@ -100,24 +101,24 @@ public class BoardManager : MonoBehaviour
     void GenerateStarterPiece()
     {
         // Player 1 pieces
-        for (int i = 8; i < 24; i++)
+        for (int i = 8; i < 11; i++)
         {
-            GameObject piece = Instantiate(piecePrefabs[1], tilesGrid[i].TileObject.transform.position, Quaternion.identity);
+            GameObject piece = Instantiate(piecePrefabs[pieceTest], tilesGrid[i].TileObject.transform.position, Quaternion.identity);
             piece.transform.SetParent(player1Pieces.transform);
             piece.GetComponent<Piece>().PlayerIndex = 1;
-            piece.name = piecePrefabs[1].name + " player " + piece.GetComponent<Piece>().PlayerIndex;
+            piece.name = piecePrefabs[pieceTest].name + " player " + piece.GetComponent<Piece>().PlayerIndex;
             AllPieces.Add(piece.GetComponent<Piece>());
             piece.GetComponent<Piece>().CurrentTileIndex = i;
             tilesGrid[i].PlayerIndexPiece = 1;
         }
 
         // Player 2 pieces
-        for (int i = 50; i < 64; i++)
+        for (int i = 50; i < 52; i++)
         {
-            GameObject piece2 = Instantiate(piecePrefabs[1], tilesGrid[i].TileObject.transform.position, Quaternion.identity);
+            GameObject piece2 = Instantiate(piecePrefabs[pieceTest], tilesGrid[i].TileObject.transform.position, Quaternion.identity);
             piece2.transform.SetParent(player2Pieces.transform);
             piece2.GetComponent<Piece>().PlayerIndex = 2;
-            piece2.name = piecePrefabs[1].name + " player " + piece2.GetComponent<Piece>().PlayerIndex;
+            piece2.name = piecePrefabs[pieceTest].name + " player " + piece2.GetComponent<Piece>().PlayerIndex;
             AllPieces.Add(piece2.GetComponent<Piece>());
             piece2.GetComponent<SpriteRenderer>().color = Color.grey;
             piece2.GetComponent<Piece>().CurrentTileIndex = i;
