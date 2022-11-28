@@ -17,15 +17,7 @@ public class TileObject : MonoBehaviour
         if(spriteColor == Color.red)
         {
             BoardManager.Instance.UpdatePlayerTurn();
-            /*foreach (Piece piece in BoardManager.Instance.AllPieces)
-            {
-                if (piece.CurrentTileIndex == thisTile.TileIndex && piece.CurrentTileIndex != BoardManager.Instance.GetPiece().CurrentTileIndex)
-                {
-                    Debug.Log(piece.name + " " +  piece.PlayerIndex);
-                    Destroy(piece.gameObject);
-                    BoardManager.Instance.AllPieces.Remove(piece);
-                }
-            }*/
+            
             for (int piece = 0; piece < BoardManager.Instance.AllPieces.Count; piece++)
             {
                 if (BoardManager.Instance.AllPieces[piece].CurrentTileIndex == thisTile.TileIndex && BoardManager.Instance.AllPieces[piece].CurrentTileIndex != BoardManager.Instance.GetPiece().CurrentTileIndex)
