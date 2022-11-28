@@ -143,10 +143,13 @@ public class BoardManager : MonoBehaviour
     {
         tilesGrid[currIndex].IsEmpty = true;
         tilesGrid[currIndex].PlayerIndexPiece = 0;
+        tilesGrid[currIndex].TileObject.GetComponent<TileObject>().thisTile.PlayerIndexPiece = 0;
         
         tilesGrid[newIndex].IsEmpty = false;
         tilesGrid[currIndex].PlayerIndexPiece = piece.PlayerIndex;
 
+        Tile oldTile = GetTile(currIndex); 
+        oldTile.PlayerIndexPiece = 0;
         Tile newTile = GetTile(newIndex);
         piece.transform.position = newTile.TileObject.transform.position;
         piece.CurrentTileIndex = newIndex;
@@ -306,5 +309,13 @@ public class BoardManager : MonoBehaviour
             piece2.GetComponent<Piece>().CurrentTileIndex = i;
             tilesGrid[i].PlayerIndexPiece = 2;
         }
+
+        
+    }
+    public void UpdateTile0()
+    {
+        Tile tile0 = GetTile(0);
+        tile0.PlayerIndexPiece = 1;
+        tile0.IsEmpty = false;
     }
 }

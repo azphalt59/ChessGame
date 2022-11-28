@@ -14,6 +14,7 @@ public class Piece : MonoBehaviour
     void Start()
     {
         BoardManager.Instance.StartPositionPiece(CurrentTileIndex, this);
+        BoardManager.Instance.UpdateTile0();
     }
     
     public virtual void PieceMovement()

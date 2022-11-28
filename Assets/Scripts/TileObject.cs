@@ -41,7 +41,20 @@ public class TileObject : MonoBehaviour
             BoardManager.Instance.AllPieces.Remove(target);
             Destroy(target.gameObject);
             thisTile.PlayerIndexPiece = BoardManager.Instance.GetPiece().PlayerIndex;
+            BoardManager.Instance.GetTile(BoardManager.Instance.GetPiece().CurrentTileIndex).PlayerIndexPiece = 0;
+            BoardManager.Instance.GetTile(BoardManager.Instance.GetPiece().CurrentTileIndex).TileObject.GetComponent<TileObject>().thisTile.PlayerIndexPiece = 0;
             BoardManager.Instance.MovePiece(BoardManager.Instance.GetPiece().CurrentTileIndex, thisTile.TileIndex, BoardManager.Instance.GetPiece());
+            if (BoardManager.Instance.GetPiece().gameObject.GetComponent<Pawn>() != null)
+            {
+                if (BoardManager.Instance.GetPiece().PlayerIndex == 1 && thisTile.TileIndex >= (BoardManager.Instance.BoardSize * BoardManager.Instance.BoardSize) -BoardManager.Instance.BoardSize)
+                {
+                    BoardManager.Instance.GetPiece().gameObject.GetComponent<Pawn>().PawnTransformation();
+                }
+                if (BoardManager.Instance.GetPiece().PlayerIndex == 2 && thisTile.TileIndex <= BoardManager.Instance.BoardSize)
+                {
+                    BoardManager.Instance.GetPiece().gameObject.GetComponent<Pawn>().PawnTransformation();
+                }
+            }
             BoardManager.Instance.ResetMoves();
             
             return;
@@ -55,6 +68,7 @@ public class TileObject : MonoBehaviour
                 BoardManager.Instance.GetPiece().gameObject.GetComponent<Pawn>().AlreadyPlayed = true;
             }
             thisTile.PlayerIndexPiece = BoardManager.Instance.GetPiece().PlayerIndex;
+            
             BoardManager.Instance.MovePiece(BoardManager.Instance.GetPiece().CurrentTileIndex, thisTile.TileIndex, BoardManager.Instance.GetPiece());
             BoardManager.Instance.ResetMoves();
             return;
