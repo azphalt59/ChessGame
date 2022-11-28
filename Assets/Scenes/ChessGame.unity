@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afaef52ecdf41de41aeb0e8693e4c106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pieceTest: 4
+  pieceTest: 5
   BoardSize: 8
   Turn: 1
   PlayerTurn: 1
@@ -169,6 +169,7 @@ MonoBehaviour:
   - {fileID: 4687959027858560375, guid: 8382b45000122cd40a1e9c0a96073669, type: 3}
   - {fileID: 4687959027858560375, guid: 1dfe9d5da484ff04d9f746ae815a50bf, type: 3}
   - {fileID: 4687959027858560375, guid: 6329bd1630012564c8247b63b2f451c5, type: 3}
+  - {fileID: 1990997923137468606, guid: 7647b0c6646b2b24182de77efd2487df, type: 3}
   AllPieces: []
   MovementPossibilities: 
   AttackPossibilities: 

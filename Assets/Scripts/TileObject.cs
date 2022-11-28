@@ -34,6 +34,10 @@ public class TileObject : MonoBehaviour
                 }
             }
             Debug.Log(target.name + " à la position " + target.CurrentTileIndex + " appartenant au joueur " + target.PlayerIndex);
+            if (BoardManager.Instance.GetPiece().gameObject.GetComponent<Pawn>() != null)
+            {
+                BoardManager.Instance.GetPiece().gameObject.GetComponent<Pawn>().AlreadyPlayed = true;
+            }
             BoardManager.Instance.AllPieces.Remove(target);
             Destroy(target.gameObject);
             thisTile.PlayerIndexPiece = BoardManager.Instance.GetPiece().PlayerIndex;
@@ -46,6 +50,10 @@ public class TileObject : MonoBehaviour
         {
             Debug.Log("move");
             BoardManager.Instance.UpdatePlayerTurn();
+            if (BoardManager.Instance.GetPiece().gameObject.GetComponent<Pawn>() != null)
+            {
+                BoardManager.Instance.GetPiece().gameObject.GetComponent<Pawn>().AlreadyPlayed = true;
+            }
             thisTile.PlayerIndexPiece = BoardManager.Instance.GetPiece().PlayerIndex;
             BoardManager.Instance.MovePiece(BoardManager.Instance.GetPiece().CurrentTileIndex, thisTile.TileIndex, BoardManager.Instance.GetPiece());
             BoardManager.Instance.ResetMoves();
@@ -60,5 +68,6 @@ public class TileObject : MonoBehaviour
             }
             
         }
+        
     }
 }

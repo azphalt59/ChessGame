@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5468717003479513005}
   - component: {fileID: 8154277958917223882}
-  - component: {fileID: 8944042267767221683}
   - component: {fileID: 7446078163613603660}
+  - component: {fileID: 4300138590490498931}
   m_Layer: 0
   m_Name: M_Pawn
   m_TagString: Untagged
@@ -86,24 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8944042267767221683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1990997923137468606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e644f405c65d6e4f9c8f1511a336f45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerIndex: 0
-  CurrentTileIndex: 0
-  MovementPossibilities: 
-  AttackPossibilities: 
-  row: 0
-  column: 0
 --- !u!65 &7446078163613603660
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -117,3 +99,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.25, y: 1.25, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4300138590490498931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990997923137468606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f220b68865413b4497fc4f4b4486adb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerIndex: 0
+  CurrentTileIndex: 0
+  row: 0
+  column: 0

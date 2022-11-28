@@ -101,7 +101,7 @@ public class BoardManager : MonoBehaviour
     void GenerateStarterPiece()
     {
         // Player 1 pieces
-        for (int i = 8; i < 11; i++)
+        for (int i = 16; i < 18; i++)
         {
             GameObject piece = Instantiate(piecePrefabs[pieceTest], tilesGrid[i].TileObject.transform.position, Quaternion.identity);
             piece.transform.SetParent(player1Pieces.transform);
@@ -113,7 +113,7 @@ public class BoardManager : MonoBehaviour
         }
 
         // Player 2 pieces
-        for (int i = 50; i < 52; i++)
+        for (int i = 45; i < 47; i++)
         {
             GameObject piece2 = Instantiate(piecePrefabs[pieceTest], tilesGrid[i].TileObject.transform.position, Quaternion.identity);
             piece2.transform.SetParent(player2Pieces.transform);
