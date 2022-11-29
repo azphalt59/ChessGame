@@ -37,6 +37,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private GameObject boardParent;
 
     [Header("UI")]
+    public GameObject PawnTransformation;
     public GameObject GameOverObject;
     public TextMeshProUGUI GameOverText;
     public TextMeshProUGUI PlayerTurnText;
@@ -48,7 +49,10 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private GameObject player1Pieces;
     [SerializeField] private GameObject player2Pieces;
     [SerializeField] private List<GameObject> piecePrefabs;
+    
     public int pieceTest;
+    public GameObject PromotedPawn;
+    public Piece dataPiece;
 
 
 
@@ -325,5 +329,52 @@ public class BoardManager : MonoBehaviour
     {
         GameOverObject.SetActive(true);
         GameOverText.text = "Player " + playerIndex + " win";
+    }
+    public void SavePawnData(Piece dataPiece, int playerIndex, int CurrentTileIndex)
+    {
+        dataPiece.PlayerIndex = playerIndex;
+        dataPiece.CurrentTileIndex = CurrentTileIndex;
+    }
+    public void PawnPromotion(Pawn pawn)
+    {
+        PromotedPawn = pawn.gameObject;
+        SavePawnData(dataPiece, pawn.PlayerIndex, pawn.CurrentTileIndex);
+        PawnTransformation.SetActive(true);
+        Destroy(PromotedPawn.GetComponent<Pawn>(),2);
+
+    }
+    public void KnightPromo()
+    {
+        PromotedPawn.AddComponent<Knight>();
+        PromotedPawn.GetComponent<SpriteRenderer>().sprite = piecePrefabs[2].GetComponent<SpriteRenderer>().sprite;
+        PawnTransformation.SetActive(false);
+        PromotedPawn.GetComponent<Knight>().PlayerIndex = dataPiece.PlayerIndex;
+        PromotedPawn.GetComponent<Knight>().CurrentTileIndex = dataPiece.CurrentTileIndex;
+
+    }
+    public void RookPromo()
+    {
+        PromotedPawn.AddComponent<Rook>();
+        PromotedPawn.GetComponent<SpriteRenderer>().sprite = piecePrefabs[0].GetComponent<SpriteRenderer>().sprite;
+        PawnTransformation.SetActive(false);
+        PromotedPawn.GetComponent<Rook>().PlayerIndex = dataPiece.PlayerIndex;
+        PromotedPawn.GetComponent<Rook>().CurrentTileIndex = dataPiece.CurrentTileIndex;
+    }
+    public void QueenPromo()
+    {
+        PromotedPawn.AddComponent<Queen>();
+        PromotedPawn.GetComponent<SpriteRenderer>().sprite = piecePrefabs[4].GetComponent<SpriteRenderer>().sprite;
+        PawnTransformation.SetActive(false);
+        PromotedPawn.GetComponent<Queen>().PlayerIndex = dataPiece.PlayerIndex;
+        PromotedPawn.GetComponent<Queen>().CurrentTileIndex = dataPiece.CurrentTileIndex;
+    }
+    public void BishopPromo()
+    {
+        PromotedPawn.AddComponent<Bishop>();
+        PromotedPawn.GetComponent<SpriteRenderer>().sprite = piecePrefabs[1].GetComponent<SpriteRenderer>().sprite;
+        PawnTransformation.SetActive(false);
+        PromotedPawn.GetComponent<Queen>().PlayerIndex = dataPiece.PlayerIndex;
+        PromotedPawn.GetComponent<Queen>().CurrentTileIndex = dataPiece.CurrentTileIndex;
+        
     }
 }

@@ -15,6 +15,7 @@ public class Pawn : Piece
     public void PawnTransformation()
     {
         Debug.Log("Promote");
+        BoardManager.Instance.PawnPromotion(this);
     }
     public override void PieceMovement()
     {

@@ -25,7 +25,7 @@ public class TileObject : MonoBehaviour
                     target = BoardManager.Instance.AllPieces[piece];
                 }
             }
-            Debug.Log(target.name + " à la position " + target.CurrentTileIndex + " appartenant au joueur " + target.PlayerIndex);
+           
             if (BoardManager.Instance.GetPiece().gameObject.GetComponent<Pawn>() != null)
             {
                 BoardManager.Instance.GetPiece().gameObject.GetComponent<Pawn>().AlreadyPlayed = true;
@@ -45,10 +45,12 @@ public class TileObject : MonoBehaviour
                 if (BoardManager.Instance.GetPiece().PlayerIndex == 1 && thisTile.TileIndex >= (BoardManager.Instance.BoardSize * BoardManager.Instance.BoardSize) -BoardManager.Instance.BoardSize)
                 {
                     BoardManager.Instance.GetPiece().gameObject.GetComponent<Pawn>().PawnTransformation();
+                    
                 }
                 if (BoardManager.Instance.GetPiece().PlayerIndex == 2 && thisTile.TileIndex <= BoardManager.Instance.BoardSize)
                 {
                     BoardManager.Instance.GetPiece().gameObject.GetComponent<Pawn>().PawnTransformation();
+                    
                 }
             }
             BoardManager.Instance.ResetMoves();
@@ -57,7 +59,6 @@ public class TileObject : MonoBehaviour
         }
         if(spriteColor == Color.green)
         {
-            Debug.Log("move");
             BoardManager.Instance.UpdatePlayerTurn();
             if (BoardManager.Instance.GetPiece().gameObject.GetComponent<Pawn>() != null)
             {
