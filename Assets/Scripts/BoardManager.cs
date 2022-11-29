@@ -37,6 +37,8 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private GameObject boardParent;
 
     [Header("UI")]
+    public GameObject GameOverObject;
+    public TextMeshProUGUI GameOverText;
     public TextMeshProUGUI PlayerTurnText;
     [HideInInspector] public int Turn = 1;
     
@@ -71,6 +73,7 @@ public class BoardManager : MonoBehaviour
     private void Update()
     {
         PlayerTurnText.text = "Player Turn " + PlayerTurn;
+
     }
     void GenerateTilesGrid()
     {
@@ -317,5 +320,10 @@ public class BoardManager : MonoBehaviour
         Tile tile0 = GetTile(0);
         tile0.PlayerIndexPiece = 1;
         tile0.IsEmpty = false;
+    }
+    public void GameOver(int playerIndex)
+    {
+        GameOverObject.SetActive(true);
+        GameOverText.text = "Player " + playerIndex + " win";
     }
 }

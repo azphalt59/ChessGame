@@ -31,6 +31,10 @@ public class TileObject : MonoBehaviour
                 BoardManager.Instance.GetPiece().gameObject.GetComponent<Pawn>().AlreadyPlayed = true;
             }
             BoardManager.Instance.AllPieces.Remove(target);
+            if(target.gameObject.GetComponent<King>() != null)
+            {
+                BoardManager.Instance.GameOver(BoardManager.Instance.GetPiece().PlayerIndex);
+            }
             Destroy(target.gameObject);
             thisTile.PlayerIndexPiece = BoardManager.Instance.GetPiece().PlayerIndex;
             BoardManager.Instance.GetTile(BoardManager.Instance.GetPiece().CurrentTileIndex).PlayerIndexPiece = 0;
