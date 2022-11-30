@@ -66,23 +66,46 @@ public class CustomPiece : Piece
         RookMvtLike();
         CustomMoves();
     }   
+    public void BreakMove(int customMoveRaw, int customMoveCol)
+    {
+    
+    }
     public void CustomMoves()
     {
         int tileIndexMovement;
         bool IsAttackmove;
-        foreach(CustomMove customMove in customPiece.customMoves)
+
+        foreach (LineMove lineMove in customPiece.customMovesList)
         {
-            if(PlayerIndex == 1)
+            foreach (CustomMove customMove in lineMove.Moves)
             {
-                tileIndexMovement = CurrentTileIndex + customMove.ColMovement + customMove.RawMovement * BoardManager.Instance.BoardSize;
-                IsAttackmove = MovementOrAttack(tileIndexMovement);
-            }
-            if (PlayerIndex == 2)
-            {
-                tileIndexMovement = CurrentTileIndex - customMove.ColMovement - customMove.RawMovement * BoardManager.Instance.BoardSize;
-                IsAttackmove = MovementOrAttack(tileIndexMovement);
+                if (PlayerIndex == 1)
+                {
+                    tileIndexMovement = CurrentTileIndex + customMove.ColMovement + customMove.RawMovement * BoardManager.Instance.BoardSize;
+                    IsAttackmove = MovementOrAttack(tileIndexMovement);
+                    if(IsAttackmove == true)
+                    {
+                        if (customMove.JumpOverPiece == false)
+                        {
+                            break;
+                        }
+                    }
+                }
+                if (PlayerIndex == 2)
+                {
+                    tileIndexMovement = CurrentTileIndex - customMove.ColMovement - customMove.RawMovement * BoardManager.Instance.BoardSize;
+                    IsAttackmove = MovementOrAttack(tileIndexMovement);
+                    if (IsAttackmove == true)
+                    {
+                        if (customMove.JumpOverPiece == false)
+                        {
+                            break;
+                        }
+                    }
+                }
             }
         }
+        
     }
     public void DiagonalMvt()
     {

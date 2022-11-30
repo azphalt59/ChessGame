@@ -10,17 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1b0c04097c74584f84524910e04b0d3, type: 3}
-  m_Name: Tadpole
+  m_Name: Dog
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: d5523d470ba8e3d40b14bed463183476, type: 3}
-  PieceName: Tadpole
+  Sprite: {fileID: 0}
+  PieceName: 
   JumpOverPiece: 0
   CanBePromoted: 0
   PromotedPiecesChoices: []
   OnlyForward: 0
   OnlyBackward: 0
   GlobalRange: 0
-  VerticalRange: 1
+  VerticalRange: 0
   HorizontalRange: 0
   DiagonalRange: 0
-  customMovesList: []
+  customMovesList:
+  - name: 
+    Moves:
+    - RawMovement: 0
+      ColMovement: 0
+      JumpOverPiece: 0
+    - RawMovement: 0
+      ColMovement: 0
+      JumpOverPiece: 0
+  - name: 
+    Moves: []

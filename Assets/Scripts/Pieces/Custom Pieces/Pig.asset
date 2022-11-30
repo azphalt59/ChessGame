@@ -23,10 +23,74 @@ MonoBehaviour:
   VerticalRange: 0
   HorizontalRange: 0
   DiagonalRange: 0
-  customMoves:
-  - RawMovement: 2
-    ColMovement: 2
-  - RawMovement: 3
-    ColMovement: 3
-  - RawMovement: 0
-    ColMovement: 0
+  customMovesList:
+  - name: L move right
+    Moves:
+    - RawMovement: 0
+      ColMovement: 1
+      JumpOverPiece: 1
+    - RawMovement: 0
+      ColMovement: 2
+      JumpOverPiece: 1
+    - RawMovement: 1
+      ColMovement: 2
+      JumpOverPiece: 0
+    - RawMovement: 2
+      ColMovement: 2
+      JumpOverPiece: 0
+    - RawMovement: 3
+      ColMovement: 2
+      JumpOverPiece: 0
+  - name: L move left
+    Moves:
+    - RawMovement: 0
+      ColMovement: -1
+      JumpOverPiece: 1
+    - RawMovement: 0
+      ColMovement: -2
+      JumpOverPiece: 1
+    - RawMovement: -1
+      ColMovement: -2
+      JumpOverPiece: 0
+    - RawMovement: -2
+      ColMovement: -2
+      JumpOverPiece: 0
+    - RawMovement: -3
+      ColMovement: -2
+      JumpOverPiece: 0
+  - name: L move left reverse
+    Moves:
+    - RawMovement: 0
+      ColMovement: -1
+      JumpOverPiece: 1
+    - RawMovement: 0
+      ColMovement: -2
+      JumpOverPiece: 1
+    - RawMovement: 1
+      ColMovement: -2
+      JumpOverPiece: 0
+    - RawMovement: 2
+      ColMovement: -2
+      JumpOverPiece: 0
+    - RawMovement: 3
+      ColMovement: -2
+      JumpOverPiece: 0
+  - name: L move right reverse
+    Moves:
+    - RawMovement: 0
+      ColMovement: 1
+      JumpOverPiece: 1
+    - RawMovement: 0
+      ColMovement: 2
+      JumpOverPiece: 1
+    - RawMovement: -1
+      ColMovement: 2
+      JumpOverPiece: 0
+    - RawMovement: -2
+      ColMovement: 2
+      JumpOverPiece: 0
+    - RawMovement: -3
+      ColMovement: 2
+      JumpOverPiece: 0
+  - name: L move right reverse
+    Moves: []

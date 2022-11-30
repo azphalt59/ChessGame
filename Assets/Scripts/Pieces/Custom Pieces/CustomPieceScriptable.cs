@@ -17,6 +17,14 @@ public class CustomPieceScriptable : ScriptableObject
     public int HorizontalRange = 0;
     public int DiagonalRange = 0;
 
-    public List<CustomMove> customMoves;
+    public List<LineMove> customMovesList;
     
+}
+
+
+[System.Serializable]
+public class LineMove 
+{
+    public string name;
+    public List<CustomMove> Moves;
 }
