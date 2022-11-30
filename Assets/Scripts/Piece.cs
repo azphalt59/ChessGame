@@ -6,12 +6,11 @@ public class Piece : MonoBehaviour
 {
     public int PlayerIndex;
     public int CurrentTileIndex;
-
     
     public int row;
     public int column;
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         BoardManager.Instance.StartPositionPiece(CurrentTileIndex, this);
         BoardManager.Instance.UpdateTile0();
@@ -19,7 +18,7 @@ public class Piece : MonoBehaviour
     
     public virtual void PieceMovement()
     {
-
+        
     }
     public bool MovementOrAttack(int mvtTileIndex)
     {
@@ -47,6 +46,7 @@ public class Piece : MonoBehaviour
         }
         return AnotherPiece;
     }
+
 
     
 }

@@ -50,11 +50,24 @@ public class TileObject : MonoBehaviour
                 if (BoardManager.Instance.GetPiece().PlayerIndex == 2 && thisTile.TileIndex <= BoardManager.Instance.BoardSize)
                 {
                     BoardManager.Instance.GetPiece().gameObject.GetComponent<Pawn>().PawnTransformation();
-                    
+                }
+            }
+            if (BoardManager.Instance.GetPiece().gameObject.GetComponent<CustomPiece>().customPiece.CanBePromoted == true)
+            {
+                if (BoardManager.Instance.GetPiece().PlayerIndex == 1 && thisTile.TileIndex >= (BoardManager.Instance.BoardSize * BoardManager.Instance.BoardSize) - BoardManager.Instance.BoardSize)
+                {
+
+                    Debug.Log("promo");
+                    BoardManager.Instance.GetPiece().gameObject.GetComponent<CustomPiece>().CustomPromotion();
+
+                }
+                if (BoardManager.Instance.GetPiece().PlayerIndex == 2 && thisTile.TileIndex <= BoardManager.Instance.BoardSize)
+                {
+                    Debug.Log("promo");
+                    BoardManager.Instance.GetPiece().gameObject.GetComponent<CustomPiece>().CustomPromotion();
                 }
             }
             BoardManager.Instance.ResetMoves();
-            
             return;
         }
         if(spriteColor == Color.green)

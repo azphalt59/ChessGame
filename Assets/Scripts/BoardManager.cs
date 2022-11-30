@@ -26,7 +26,7 @@ public class BoardManager : MonoBehaviour
     public int PlayerTurn = 1;
     
 
-    [Header("Board")]
+    [Header("Board data")]
     public int BoardSize = 8;
     private int columns;
     private int rows;
@@ -36,6 +36,11 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private GameObject boardParent;
 
+    [Header("Custom Board")]
+    [SerializeField] private bool customBoard = false;
+    public List<GameObject> FirstLinePiece;
+    public List<GameObject> SecondLinePiece;
+
     [Header("UI")]
     public GameObject PawnTransformation;
     public GameObject GameOverObject;
@@ -44,8 +49,11 @@ public class BoardManager : MonoBehaviour
     [HideInInspector] public int Turn = 1;
     
     
-    [Header("Pieces")]
+    [Header("Pieces data")]
     public List<Piece> AllPieces;
+    public List<Piece> P1;
+    public List<Piece> P2;
+
     [SerializeField] private GameObject player1Pieces;
     [SerializeField] private GameObject player2Pieces;
     [SerializeField] private List<GameObject> piecePrefabs;
@@ -53,10 +61,6 @@ public class BoardManager : MonoBehaviour
     public int pieceTest;
     public GameObject PromotedPawn;
     public Piece dataPiece;
-
-
-
-
 
     private void Awake()
     {
@@ -72,12 +76,15 @@ public class BoardManager : MonoBehaviour
     {
         columns = BoardSize;
         rows = BoardSize;
+        FirstLinePiece = new List<GameObject>(GetComponent<CustomBoard>().FirstLinePiece.Count);
+        SecondLinePiece = new List<GameObject>(GetComponent<CustomBoard>().SecondLinePiece.Count);
+        FirstLinePiece = GetComponent<CustomBoard>().FirstLinePiece;
+        SecondLinePiece = GetComponent<CustomBoard>().SecondLinePiece;
         GenerateTilesGrid();
     }
     private void Update()
     {
         PlayerTurnText.text = "Player Turn " + PlayerTurn;
-
     }
     void GenerateTilesGrid()
     {
@@ -117,7 +124,23 @@ public class BoardManager : MonoBehaviour
             }
         }
         //GenerateTestStarterPiece();
-        ClassicStarterBoard();
+        if(customBoard == false)
+        {
+            ClassicStarterBoard();
+        }
+        if(customBoard == true)
+        {
+            if(FirstLinePiece.Count == 0 && SecondLinePiece.Count == 0)
+            {
+                ClassicStarterBoard();
+            }
+            else
+            {
+                CustomBoard();
+            }
+        }
+        
+        
     }
     void GenerateTestStarterPiece()
     {
@@ -160,14 +183,11 @@ public class BoardManager : MonoBehaviour
         Tile newTile = GetTile(newIndex);
         piece.transform.position = newTile.TileObject.transform.position;
         piece.CurrentTileIndex = newIndex;
-        //MovementPossibilities.Clear();
-        //AttackPossibilities.Clear();
     }
     public void StartPositionPiece(int currIndex, Piece piece)
     {
         MovePiece(0, currIndex, piece);
     }
-
     public Tile GetTile(int tileIndex)
     {
         return tilesGrid[tileIndex];
@@ -208,7 +228,96 @@ public class BoardManager : MonoBehaviour
             Turn++;
         }
     }
+    public void CustomBoard()
+    {
+        int pieceList = 0;
+        int pieceList2 = 0;
+        int pieceList3 = 0;
+        int pieceList4 = 0;
+       
+        // First Line
+        for (int i = 0; i < BoardSize ; i++)
+        {
+            
+            if (FirstLinePiece[pieceList] != null)
+            {
+                GameObject piece = Instantiate(FirstLinePiece[pieceList], tilesGrid[i].TileObject.transform.position, Quaternion.identity);
+                piece.transform.SetParent(player1Pieces.transform);
+                if(piece.GetComponent<Piece>() != null)
+                {
+                    piece.GetComponent<Piece>().PlayerIndex = 1;
+                    piece.name = FirstLinePiece[pieceList].name + " player " + piece.GetComponent<Piece>().PlayerIndex;
+                    AllPieces.Add(piece.GetComponent<Piece>());
+                    P1.Add(piece.GetComponent<Piece>());
+                    piece.GetComponent<Piece>().CurrentTileIndex = i;
+                    tilesGrid[i].PlayerIndexPiece = 1;
+                }
+                pieceList++;
+            }
+        }
+        // Second Line
+        for (int i = BoardSize; i < BoardSize * 2; i++)
+        {
+            
+            if (SecondLinePiece[pieceList2] != null)
+            {
+                GameObject piece = Instantiate(SecondLinePiece[pieceList2], tilesGrid[i].TileObject.transform.position, Quaternion.identity);
+                piece.transform.SetParent(player1Pieces.transform);
+                if (piece.GetComponent<Piece>() != null)
+                {
+                    piece.GetComponent<Piece>().PlayerIndex = 1;
+                    piece.name = SecondLinePiece[pieceList2].name + " player " + piece.GetComponent<Piece>().PlayerIndex;
+                    AllPieces.Add(piece.GetComponent<Piece>());
+                    P1.Add(piece.GetComponent<Piece>());
+                    piece.GetComponent<Piece>().CurrentTileIndex = i;
+                    tilesGrid[i].PlayerIndexPiece = 1;
+                }
+                pieceList2++;
+            }
+        }
 
+        // First Line
+        for (int i = tilesGrid.Length-1; i > tilesGrid.Length - BoardSize-1; i--)
+        {
+            if (FirstLinePiece[pieceList3] != null)
+            {
+                GameObject piece = Instantiate(FirstLinePiece[pieceList3], tilesGrid[i].TileObject.transform.position, Quaternion.identity);
+                piece.transform.SetParent(player1Pieces.transform);
+                if (piece.GetComponent<Piece>() != null)
+                {
+                    piece.GetComponent<Piece>().PlayerIndex = 2;
+                    piece.name = FirstLinePiece[pieceList3].name + " player " + piece.GetComponent<Piece>().PlayerIndex;
+                    piece.GetComponent<SpriteRenderer>().color = Color.grey;
+                    AllPieces.Add(piece.GetComponent<Piece>());
+                    P2.Add(piece.GetComponent<Piece>());
+                    piece.GetComponent<Piece>().CurrentTileIndex = i;
+                    tilesGrid[i].PlayerIndexPiece = 2;
+                }
+                pieceList3++;
+            }
+        }
+        //Second Line
+        for (int i = tilesGrid.Length - BoardSize-1; i > tilesGrid.Length - (BoardSize * 2)-1; i--)
+        {
+            
+            if (SecondLinePiece[pieceList4] != null)
+            {
+                GameObject piece = Instantiate(SecondLinePiece[pieceList4], tilesGrid[i].TileObject.transform.position, Quaternion.identity);
+                piece.transform.SetParent(player1Pieces.transform);
+                if (piece.GetComponent<Piece>() != null)
+                {
+                    piece.GetComponent<Piece>().PlayerIndex = 2;
+                    piece.name = SecondLinePiece[pieceList4].name + " player " + piece.GetComponent<Piece>().PlayerIndex;
+                    piece.GetComponent<SpriteRenderer>().color = Color.grey;
+                    AllPieces.Add(piece.GetComponent<Piece>());
+                    P2.Add(piece.GetComponent<Piece>());
+                    piece.GetComponent<Piece>().CurrentTileIndex = i;
+                    tilesGrid[i].PlayerIndexPiece = 2;
+                }
+                pieceList4++;
+            }
+        }
+    }
     public void ClassicStarterBoard()
     {
         // Player 1 pieces
@@ -231,12 +340,12 @@ public class BoardManager : MonoBehaviour
                 //bishop
                 piecePrefabInt = 1;
             }
-            if (i == 3)
+            if (i == BoardSize*0.5 -1)
             {
                 //king
                 piecePrefabInt = 3;
             }
-            if (i == 4)
+            if (i == BoardSize*0.5)
             {
                 //queen
                 piecePrefabInt = 4;
@@ -246,6 +355,7 @@ public class BoardManager : MonoBehaviour
             piece.GetComponent<Piece>().PlayerIndex = 1;
             piece.name = piecePrefabs[piecePrefabInt].name + " player " + piece.GetComponent<Piece>().PlayerIndex;
             AllPieces.Add(piece.GetComponent<Piece>());
+            P1.Add(piece.GetComponent<Piece>());
             piece.GetComponent<Piece>().CurrentTileIndex = i;
             tilesGrid[i].PlayerIndexPiece = 1;
         }
@@ -257,6 +367,7 @@ public class BoardManager : MonoBehaviour
             piece.GetComponent<Piece>().PlayerIndex = 1;
             piece.name = piecePrefabs[5].name + " player " + piece.GetComponent<Piece>().PlayerIndex;
             AllPieces.Add(piece.GetComponent<Piece>());
+            P1.Add(piece.GetComponent<Piece>());
             piece.GetComponent<Piece>().CurrentTileIndex = i;
             tilesGrid[i].PlayerIndexPiece = 1;
         }
@@ -281,12 +392,12 @@ public class BoardManager : MonoBehaviour
                 //bishop
                 piecePrefabInt = 1;
             }
-            if (i == tilesGrid.Length -4)
+            if (i == tilesGrid.Length - BoardSize*0.5-1)
             {
                 //king
                 piecePrefabInt = 3;
             }
-            if (i == tilesGrid.Length-5)
+            if (i == tilesGrid.Length- BoardSize*0.5)
             {
                 //queen
                 piecePrefabInt = 4;
@@ -298,6 +409,7 @@ public class BoardManager : MonoBehaviour
                 piece.GetComponent<Piece>().PlayerIndex = 2;
                 piece.name = piecePrefabs[piecePrefabInt].name + " player " + piece.GetComponent<Piece>().PlayerIndex;
                 AllPieces.Add(piece.GetComponent<Piece>());
+                P2.Add(piece.GetComponent<Piece>());
                 piece.GetComponent<SpriteRenderer>().color = Color.grey;
                 piece.GetComponent<Piece>().CurrentTileIndex = i;
                 tilesGrid[i].PlayerIndexPiece = 2;
@@ -312,12 +424,11 @@ public class BoardManager : MonoBehaviour
             piece2.GetComponent<Piece>().PlayerIndex = 2;
             piece2.name = piecePrefabs[5].name + " player " + piece2.GetComponent<Piece>().PlayerIndex;
             AllPieces.Add(piece2.GetComponent<Piece>());
+            P2.Add(piece2.GetComponent<Piece>());
             piece2.GetComponent<SpriteRenderer>().color = Color.grey;
             piece2.GetComponent<Piece>().CurrentTileIndex = i;
             tilesGrid[i].PlayerIndexPiece = 2;
         }
-
-        
     }
     public void UpdateTile0()
     {
@@ -325,6 +436,7 @@ public class BoardManager : MonoBehaviour
         tile0.PlayerIndexPiece = 1;
         tile0.IsEmpty = false;
     }
+    
     public void GameOver(int playerIndex)
     {
         GameOverObject.SetActive(true);
@@ -335,14 +447,14 @@ public class BoardManager : MonoBehaviour
         dataPiece.PlayerIndex = playerIndex;
         dataPiece.CurrentTileIndex = CurrentTileIndex;
     }
-    public void PawnPromotion(Pawn pawn)
+    public void PawnPromotion(Piece piece)
     {
-        PromotedPawn = pawn.gameObject;
-        SavePawnData(dataPiece, pawn.PlayerIndex, pawn.CurrentTileIndex);
+        PromotedPawn = piece.gameObject;
+        SavePawnData(dataPiece, piece.PlayerIndex, piece.CurrentTileIndex);
         PawnTransformation.SetActive(true);
         Destroy(PromotedPawn.GetComponent<Pawn>(),2);
-
     }
+    
     public void KnightPromo()
     {
         PromotedPawn.AddComponent<Knight>();
@@ -377,4 +489,5 @@ public class BoardManager : MonoBehaviour
         PromotedPawn.GetComponent<Queen>().CurrentTileIndex = dataPiece.CurrentTileIndex;
         
     }
+    
 }

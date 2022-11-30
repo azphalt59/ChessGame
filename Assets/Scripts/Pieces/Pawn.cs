@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Pawn : Piece
 {
+    public bool CustomMove = false;
     public bool AlreadyPlayed = false;
     private void OnMouseDown()
     {

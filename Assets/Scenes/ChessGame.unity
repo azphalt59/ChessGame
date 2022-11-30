@@ -155,7 +155,7 @@ RectTransform:
   m_Children:
   - {fileID: 618916474}
   m_Father: {fileID: 1078582433}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -235,7 +235,7 @@ RectTransform:
   - {fileID: 2068448094}
   - {fileID: 748403301}
   m_Father: {fileID: 1078582433}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -252,6 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227841474}
   - component: {fileID: 227841473}
+  - component: {fileID: 227841475}
   m_Layer: 0
   m_Name: ChessManager
   m_TagString: Untagged
@@ -280,12 +281,17 @@ MonoBehaviour:
   firstTilePos: {fileID: 2028807219}
   tilePrefab: {fileID: 5130806016717022618, guid: 40eb4201a68c34b4a8efc49403d12c74, type: 3}
   boardParent: {fileID: 1560883871}
+  customBoard: 1
+  FirstLinePiece: []
+  SecondLinePiece: []
   PawnTransformation: {fileID: 95626473}
   GameOverObject: {fileID: 85767392}
   GameOverText: {fileID: 618916475}
   PlayerTurnText: {fileID: 1232182908}
   Turn: 1
   AllPieces: []
+  P1: []
+  P2: []
   player1Pieces: {fileID: 577804303}
   player2Pieces: {fileID: 1780927268}
   piecePrefabs:
@@ -295,6 +301,7 @@ MonoBehaviour:
   - {fileID: 4687959027858560375, guid: 1dfe9d5da484ff04d9f746ae815a50bf, type: 3}
   - {fileID: 4687959027858560375, guid: 6329bd1630012564c8247b63b2f451c5, type: 3}
   - {fileID: 1990997923137468606, guid: 7647b0c6646b2b24182de77efd2487df, type: 3}
+  - {fileID: 7061427059123188109, guid: 912c5c74cf2f7e5449bd86384fc562bc, type: 3}
   pieceTest: 5
   PromotedPawn: {fileID: 0}
   dataPiece: {fileID: 563507513}
@@ -313,6 +320,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &227841475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227841472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac89560ab117f0c43b1c23bfb0967a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FirstLinePiece:
+  - {fileID: 4687959027858560375, guid: 4ad268b1e8c14d14eb18090ba3047759, type: 3}
+  - {fileID: 8602568251350126778, guid: af48e75b606764d4aa3fbea2fde5312f, type: 3}
+  - {fileID: 4687959027858560375, guid: 4ae7ceab043db654284700a2570bf82f, type: 3}
+  - {fileID: 4687959027858560375, guid: 1dfe9d5da484ff04d9f746ae815a50bf, type: 3}
+  - {fileID: 2096596537979182759, guid: 2611de1e07ef626408957a6ed881a4f3, type: 3}
+  - {fileID: 4687959027858560375, guid: 8382b45000122cd40a1e9c0a96073669, type: 3}
+  - {fileID: 8602568251350126778, guid: af48e75b606764d4aa3fbea2fde5312f, type: 3}
+  - {fileID: 4687959027858560375, guid: 4ad268b1e8c14d14eb18090ba3047759, type: 3}
+  SecondLinePiece:
+  - {fileID: 8602568251350126778, guid: af48e75b606764d4aa3fbea2fde5312f, type: 3}
+  - {fileID: 2096596537979182759, guid: 2611de1e07ef626408957a6ed881a4f3, type: 3}
+  - {fileID: 1990997923137468606, guid: 7647b0c6646b2b24182de77efd2487df, type: 3}
+  - {fileID: 7061427059123188109, guid: 912c5c74cf2f7e5449bd86384fc562bc, type: 3}
+  - {fileID: 7061427059123188109, guid: 912c5c74cf2f7e5449bd86384fc562bc, type: 3}
+  - {fileID: 1990997923137468606, guid: 7647b0c6646b2b24182de77efd2487df, type: 3}
+  - {fileID: 1990997923137468606, guid: 7647b0c6646b2b24182de77efd2487df, type: 3}
+  - {fileID: 8602568251350126778, guid: af48e75b606764d4aa3fbea2fde5312f, type: 3}
 --- !u!1 &333285521
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,8 +879,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1232182903}
-  - {fileID: 85767393}
   - {fileID: 95626474}
+  - {fileID: 85767393}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1432,7 +1469,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1525669071}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
